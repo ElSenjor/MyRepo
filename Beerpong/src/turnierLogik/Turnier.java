@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Turnier {
 	private Spielplan spielplan;
+	private Blitztabelle blitz;
 	private int anzahlTische;
 	private Spiel[] aktuelleSpiele;
 	private Spiel[] naechsteSpiele;
@@ -26,13 +27,15 @@ public class Turnier {
 		for (int i = 0; i < anzahlTische; i++) {
 			naechsteSpiele[i] = spielplan.getNaechstesSpiel();
 		}
+		blitz = new Blitztabelle(spielplan);
 	}
 
-	public void setErgebnis(int nrAkt, Ergebnis erg) throws Exception {
+	public void setErgebnis(int nrAkt, int ergA, int ergB) throws Exception {
 		// TODO Fehlerbehandlung falls Mannschaft schon spielt ggf. User fragen wer als
 		// nächstes spielen soll
 		// TODO ggf. generell User fragen ob die nächste Begegung passend ist und User
 		// selber auswählen lassen
+		Ergebnis erg = new Ergebnis(ergA,ergB);
 		Spiel spiel = aktuelleSpiele[nrAkt];
 		if (spiel != null) {
 			spiel.setErgebnis(erg);
@@ -45,6 +48,7 @@ public class Turnier {
 				naechsteSpiele[i] = naechsteSpiele[i + 1];
 			}
 			naechsteSpiele[naechsteSpiele.length - 1] = spielplan.getNaechstesSpiel();
+			blitz.update();
 		} else {
 			throw new Exception("Ein Ergebnis sollte in aktuelle Spiele gesetzt werden.\nAn der Stelle " + nrAkt
 					+ " von aktuelleSpiele läuft gerade kein Spiel");
@@ -59,16 +63,12 @@ public class Turnier {
 		return new ListeVonSpielen(this.naechsteSpiele);
 	}
 
-	public Team[] getBlitztabelle() {
-		List<Team> teams = Arrays.asList(spielplan.getTeams());
-		Collections.sort(teams);
-		Team[] ret = new Team[teams.size()];
-		ret = teams.toArray(ret);
-		return ret;
-	}
-
 	public String getSpielplanString() {
 		return spielplan.getSpielPlanString();
+	}
+	
+	public String getBlitztabelleString() {
+		return blitz.getString();
 	}
 
 	public void printAktuelleSpiele() {
@@ -104,13 +104,8 @@ public class Turnier {
 		spielplan.printSpielplan();
 	}
 	
-	public String getStringFromBlitz(Team[] blitz) {
-		String ret = "<html>";
-		for(int i=0; i< blitz.length; i++) {
-			ret = ret + blitz[i].getString()+"<br>";
-		}
-		ret=ret+"</html>";
-		return ret;
+	public void printBlitztabelle() {
+		blitz.printBlitztabelle();
 	}
 
 	public static void main(String[] args) {

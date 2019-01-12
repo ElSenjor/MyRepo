@@ -85,7 +85,7 @@ public class Uebersicht extends MeinFenster implements ActionListener {
 		put(this, new Label(""), 2, 0, 1);
 		put(this, jlblSpielplan, 3, 0, 3);
 		put(this, new Label("  "), 6, 0, 1);
-		put(this, jlblBlitztabelle,7,0,3);
+		put(this, jlblBlitztabelle, 7, 0, 3);
 		pack();
 		setVisible(true);
 		updateGUI();
@@ -105,7 +105,7 @@ public class Uebersicht extends MeinFenster implements ActionListener {
 			lblNae[i][1].setText(arrNae.getStringTeamB(i));
 		}
 		jlblSpielplan.setText(t.getSpielplanString());
-		jlblBlitztabelle.setText(t.getStringFromBlitz(t.getBlitztabelle()));
+		jlblBlitztabelle.setText(t.getBlitztabelleString());
 		pack();
 		revalidate();
 		repaint();
@@ -113,39 +113,35 @@ public class Uebersicht extends MeinFenster implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		// Button herausfinden
-		int x = -1;
+		int spielNr = -1;
 		for (int i = 0; i < btnErg.length; i++) {
 			if (btnErg[i] == e.getSource()) {
-				x = i;
+				spielNr = i;
 			}
 		}
-		if (x == -1) {
+		if (spielNr == -1) {
 			System.out.println("Button not found");
 			return;
 		}
 
 		try {
-			int a = Integer.parseInt(txtErg[x][0].getText());
-			int b = Integer.parseInt(txtErg[x][1].getText());
+			int a = Integer.parseInt(txtErg[spielNr][0].getText());
+			int b = Integer.parseInt(txtErg[spielNr][1].getText());
 
 			if (a >= 0 && a <= 10 && b >= 0 && b <= 10) {
 				if (a != b) {
-					t.setErgebnis(x, new Ergebnis(a, b));
+					t.setErgebnis(spielNr, a, b);
 					updateGUI();
 				}
 			}
-			Team[] blitz = t.getBlitztabelle();
-			for(int i=0; i<blitz.length; i++) {
-				System.out.println(blitz[i].getString());
-				
-			}
+			t.printBlitztabelle();
+
 		} catch (Exception ex) {
 			// TODO Fehlermeldungen für String Int Conversion behandeln
 		}
-		txtErg[x][0].setText("");
-		txtErg[x][1].setText("");
+		txtErg[spielNr][0].setText("");
+		txtErg[spielNr][1].setText("");
 	}
-
 
 	public static void main(String[] args) {
 		Turnier t = new Turnier(4, 2);

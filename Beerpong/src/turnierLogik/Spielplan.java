@@ -2,12 +2,12 @@ package turnierLogik;
 
 import java.util.Scanner;
 
-public class Spielplan {
+class Spielplan {
 	private Team[] teams;
 	private Spiel[] spielplan;
 	private int naechstesSpiel = 0;
 
-	public Spielplan(int anzahlTeams) throws TeamAnzahlException {
+	Spielplan(int anzahlTeams) throws TeamAnzahlException {
 		int spielPerm[];
 		Spiel[] spiele;
 
@@ -62,7 +62,7 @@ public class Spielplan {
 		}
 	}
 
-	public Spiel getNaechstesSpiel() {
+	Spiel getNaechstesSpiel() {
 		if (naechstesSpiel < spielplan.length) {
 			Spiel ret = this.spielplan[naechstesSpiel];
 			naechstesSpiel++;
@@ -72,7 +72,7 @@ public class Spielplan {
 		}
 	}
 
-	public Spiel getSpielNachNr(int nr) {
+	Spiel getSpielNachNr(int nr) {
 		if (nr >= 0 && nr < spielplan.length) {
 			return spielplan[nr];
 		} else {
@@ -80,7 +80,7 @@ public class Spielplan {
 		}
 	}
 
-	public String getSpielPlanString() {
+	String getSpielPlanString() {
 		String ret = "<html>";
 		for (int i = 0; i < spielplan.length; i++) {
 			ret = ret + spielplan[i].getString() + "<br>";
@@ -89,11 +89,11 @@ public class Spielplan {
 		return ret;
 	}
 	
-	public Team[] getTeams() {
+	Team[] getTeams() {
 		return teams;
 	}
 
-	public void printTeams() {
+	void printTeams() {
 		// gibt Namen der Teams aus
 		System.out.println("Die Teams für heute:");
 		for (int i = 0; i < teams.length; i++) {
@@ -102,7 +102,7 @@ public class Spielplan {
 		System.out.println("");
 	}
 
-	public void printSpielplan() {
+	void printSpielplan() {
 		System.out.println("Der Spielplan für heute:");
 		for (int i = 0; i < spielplan.length; i++) {
 			spielplan[i].print();

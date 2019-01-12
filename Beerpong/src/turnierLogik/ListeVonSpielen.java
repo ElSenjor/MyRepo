@@ -4,7 +4,7 @@ public class ListeVonSpielen {
 	private Spiel[] spiele;
 	public final int length;
 	
-	ListeVonSpielen(Spiel[] spiele){
+	public ListeVonSpielen(Spiel[] spiele){
 		this.spiele = spiele;
 		length = spiele.length;
 	}

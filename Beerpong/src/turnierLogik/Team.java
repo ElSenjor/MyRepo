@@ -1,25 +1,25 @@
 package turnierLogik;
 
-public class Team implements Comparable<Team> {
+class Team implements Comparable<Team> {
 	private final String name;
 	private int siege = 0;
 	private int niederlagen = 0;
 	private int pos = 0;
 	private int neg = 0;
 
-	public Team(String name) {
+	Team(String name) {
 		this.name = name;
 	}
 
-	public String getName() {
+	String getName() {
 		return name;
 	}
 	
-	public String getString() {
+	String getString() {
 		return name+" "+Integer.toString(siege)+"-"+Integer.toString(niederlagen)+", "+Integer.toString(pos)+"-"+Integer.toString(neg);
 	}
 
-	public void addSpiel(Spiel spiel) throws IllegalArgumentException {
+	void addSpiel(Spiel spiel) throws IllegalArgumentException {
 		Ergebnis erg = spiel.getErgebnis();
 		if (spiel.getStringTeamA() == name) {
 			pos += erg.getScoreA();
