@@ -3,6 +3,7 @@ package turnierGUI;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.*;
 
 public abstract class MeinFenster extends Frame {
 	private static final long serialVersionUID = 1601323251219439243L;

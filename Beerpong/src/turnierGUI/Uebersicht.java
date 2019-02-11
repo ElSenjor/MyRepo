@@ -2,6 +2,8 @@ package turnierGUI;
 
 import java.awt.*;
 import java.awt.event.*;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -143,9 +145,5 @@ public class Uebersicht extends MeinFenster implements ActionListener {
 		txtErg[spielNr][1].setText("");
 	}
 
-	public static void main(String[] args) {
-		Turnier t = new Turnier(4, 2);
-		@SuppressWarnings("unused")
-		Uebersicht u = new Uebersicht(t);
-	}
+
 }
