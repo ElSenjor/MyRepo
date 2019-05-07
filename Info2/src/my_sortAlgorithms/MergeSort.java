@@ -38,23 +38,10 @@ public class MergeSort<T extends Comparable<T>> {
 	}
 
 	public void sort(T[] a) {
-		if(!istPotenzVon2(a.length)) {
-			List<T> list = new ArrayList<T>(Arrays.asList(a));
-			int nextPot2 = (int)(Math.log((double)a.length)/Math.log(2));
-			while(list.size()<Math.pow(2,nextPot2+1)) {
-				list.add(null);
-			}
-			a = (T[])new Comparable[list.size()];
-			a = list.toArray(a);
-		}
-		
 		
 		// Vor.: a.length ist 2er-Potenz
 		T[] helpB = a.clone();
 		T[] helpC = a.clone();
-//		System.out.println("A: "+Arrays.toString(a));
-//		System.out.println("B: "+Arrays.toString(helpB));
-//		System.out.println("C: "+Arrays.toString(helpC));
 		for (int size = 1; size < a.length; size *= 2) {
 			// a auf b und c verteilen indem immer size viele Elemente kopiert werden, wobei
 			// size eine 2er Potenz ist
@@ -76,7 +63,7 @@ public class MergeSort<T extends Comparable<T>> {
 	}
 
 	public static void main(String[] args) {
-		Integer[] a = { 17, 42, 3, 22, 5, 29, 54, 6 ,7};
+		Integer[] a = { 17, 42, 3, 22, 5, 29, 54, 6 };
 		MergeSort<Integer> ms = new MergeSort<Integer>();
 		System.out.println("A: " + Arrays.toString(a));
 		ms.sort(a);
